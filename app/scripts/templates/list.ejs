@@ -1,14 +1,10 @@
-<div class="row">
-  <div class="col-xs-1">
+<div class="piano checkbox">
+  <div class="pull-right">
+    <a href="<%= url %>" target="_blank" title="website"><i class="glyphicon glyphicon-link"></i></a>
+    <a href="https://maps.google.com/maps?daddr=<%= position.latitude %>,<%= position.longitude %>" target="_blank" title="directions"><i class="glyphicon glyphicon-globe"></i></a>
+  </div>
+  <label<% if (isPlayed) %> class="text-muted"<% %>>
     <input type="checkbox" id="check<%= id %>" name="check<%= id %>" class="piano-cb" data-id="<%= id %>"<% if (isPlayed) %> checked<% %>>
-  </div>
-  <div class="col-xs-8">
-    <label for="check<%= id %>"<% if (isPlayed) %> class="text-muted"<% %>><%= title %></label>
-  </div>
-  <div class="col-xs-3">
-    <div class="pull-right">
-      <a href="<%= url %>" target="_blank" title="website"><i class="glyphicon glyphicon-link"></i></a>
-      <a href="https://maps.google.com/maps?daddr=<%= position.latitude %>,<%= position.longitude %>" target="_blank" title="directions"><i class="glyphicon glyphicon-globe"></i></a>
-    </div>
-  </div>
+    <%= title %>
+  </label>
 </div>

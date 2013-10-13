@@ -9,6 +9,5 @@ define(['backbone', 'model', 'locations', 'view'], function (Backbone, PianosCol
       pianos.setCurrentLocation(position.coords);
     });
   }
-  var view = new PianoView({collection: pianos});
-  return view;
+  return new PianoView({collection: pianos});
 });

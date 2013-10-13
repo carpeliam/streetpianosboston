@@ -7,7 +7,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
       'change #hide': 'showOrHidePlayedPianos'
     },
     initialize: function() {
-      this.collection.on('sort', _(this.render).bind(this));
+      this.collection.on('sort', this.render, this);
     },
 
     render: function() {
@@ -22,8 +22,8 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
 
     togglePiano: function(e) {
       var $cb = $(e.target),
-          $row = $cb.closest('.row'),
-          $label = $row.find('label[for=' + $cb.attr('id') + ']'),
+          $label = $cb.parent(),
+          $row = $cb.closest('.piano'),
           cid = $cb.data('id'),
           piano = this.collection.get(cid);
       $label.toggleClass('text-muted');
@@ -40,7 +40,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
     showOrHidePlayedPianos: function() {
       var playedPianos = this.collection.select(function(p) { return p.isPlayed(); }),
           ids = _(playedPianos).map(function(p) { return '#check' + p.cid; });
-      this.$(ids.join()).closest('.row').toggle();
+      this.$(ids.join()).closest('.piano').toggle();
     }
   });
 });
