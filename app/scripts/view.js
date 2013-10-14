@@ -1,21 +1,25 @@
-define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!templates/head.html'], function($, _, Backbone, listTmpl, header) {
+define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!templates/head.ejs'], function($, _, Backbone, listTmpl, headerTmpl) {
   'use strict';
   return Backbone.View.extend({
-    template: _.template(listTmpl),
+    templates: {
+      head: _.template(headerTmpl),
+      list: _.template(listTmpl)
+    },
     events: {
       'change .piano-cb': 'togglePiano',
       'change #hide': 'showOrHidePlayedPianos'
     },
     initialize: function() {
+      window.c = this.collection;
       this.collection.on('sort', this.render, this);
     },
 
     render: function() {
       var view = this;
-      view.$el.html(header);
+      view.$el.html(view.templates.head( {count: view.collection.playCount()} ));
       view.collection.each(function(piano) {
         var context = _(piano.toJSON()).extend({id: piano.cid, isPlayed: piano.isPlayed()});
-        view.$el.append(view.template(context));
+        view.$el.append(view.templates.list(context));
       });
       return view;
     },
@@ -26,6 +30,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
           $row = $cb.closest('.piano'),
           cid = $cb.data('id'),
           piano = this.collection.get(cid);
+      
       $label.toggleClass('text-muted');
       if ($cb.is(':checked')) {
         piano.play();
@@ -35,6 +40,12 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
       } else {
         piano.unplay();
       }
+
+      var playCount = this.collection.playCount(),
+          $playCount = this.$('#playCount'),
+          $pianoPlural = this.$('#pianoPlural');
+      $playCount.text(playCount);
+      $pianoPlural.text( (playCount === 1) ? 'piano' : 'pianos');
     },
 
     showOrHidePlayedPianos: function() {

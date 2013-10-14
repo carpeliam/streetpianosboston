@@ -31,6 +31,11 @@ define(['backbone', 'haversine'], function(Backbone, distance) {
       this.currentLocation = location;
       this.sort();
     },
+
+    playCount: function() {
+      return this.select(function(p) { return p.isPlayed(); }).length;
+    },
+
     comparator: function(loc1, loc2) {
       if (typeof this.currentLocation === 'undefined') {
         return 0;
