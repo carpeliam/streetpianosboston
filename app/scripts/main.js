@@ -14,7 +14,7 @@ require.config({
     bootstrapTooltip: '../bower_components/sass-bootstrap/js/tooltip',
     bootstrapTransition: '../bower_components/sass-bootstrap/js/transition',
     underscore: '../bower_components/underscore/underscore-min',
-    backbone: '../bower_components/backbone/backbone-min',
+    backbone: '../bower_components/backbone/backbone',
     text: '../bower_components/requirejs-text/text'
   },
   shim: {
