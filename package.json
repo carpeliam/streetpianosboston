@@ -2,6 +2,7 @@
   "name": "streetpianosboston",
   "version": "0.0.0",
   "scripts": {
+    "server": "grunt server",
     "prebuild": "bower install",
     "build": "grunt build"
   },
