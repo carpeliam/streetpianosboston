@@ -7,21 +7,28 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
     },
     events: {
       'change .piano-cb': 'togglePiano',
+      'click .toggle-sorting-help': 'toggleSortingHelp',
       'change #hide': 'showOrHidePlayedPianos'
     },
     initialize: function() {
       window.c = this.collection;
+      this.showSortingMessage = window.location.protocol !== 'https:';
       this.collection.on('sort', this.render, this);
     },
 
     render: function() {
       var view = this;
-      view.$el.html(view.templates.head( {count: view.collection.playCount()} ));
+      view.$el.html(view.templates.head({ count: view.collection.playCount(), showSortingMessage: this.showSortingMessage }));
       view.collection.each(function(piano) {
         var context = _(piano.toJSON()).extend({id: piano.cid, isPlayed: piano.isPlayed()});
         view.$el.append(view.templates.list(context));
       });
       return view;
+    },
+
+    toggleSortingHelp: function(e) {
+      e.preventDefault();
+      this.$('.sorting-help').toggle();
     },
 
     togglePiano: function(e) {
@@ -30,7 +37,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/list.ejs', 'text!tem
           $row = $cb.closest('.piano'),
           cid = $cb.data('id'),
           piano = this.collection.get(cid);
-      
+
       $label.toggleClass('text-muted');
       if ($cb.is(':checked')) {
         piano.play();
