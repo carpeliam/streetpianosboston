@@ -15,7 +15,8 @@ require.config({
     bootstrapTransition: '../bower_components/sass-bootstrap/js/transition',
     underscore: '../bower_components/underscore/underscore-min',
     backbone: '../bower_components/backbone/backbone',
-    text: '../bower_components/requirejs-text/text'
+    text: '../bower_components/requirejs-text/text',
+    async: '../bower_components/requirejs-plugins/src/async'
   },
   shim: {
     bootstrapAffix: {

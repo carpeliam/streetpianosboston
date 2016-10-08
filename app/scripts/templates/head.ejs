@@ -1,34 +1,10 @@
 <div class="checkbox">
   <span class="pull-right">
-    <% if (showSortingMessage) { %>
-    <a href class="toggle-sorting-help">piano sorting help <i class="glyphicon glyphicon-question-sign"></i></a>
-    <% }; %>
+    <a href id="toggleMapView"><span class="glyphicon glyphicon-map-marker"></span></a>
+    <strong id="playCount"><%= count %></strong> <span id="pianoPlural">pianos</span> played
   </span>
   <label>
     <input type="checkbox" id="hide" name="hide">
-    <strong>Hide Played Pianos</strong> |
-    <strong id="playCount"><%= count %></strong> <span id="pianoPlural">pianos</span> played
+    <strong>Hide Played Pianos</strong>
   </label>
-</div>
-<div class="sorting-help" style="display: none">
-  <a href class="toggle-sorting-help pull-right"><i class="glyphicon glyphicon-remove-sign"></i></a>
-  This site attempts to show the pianos closest to you at the top. Unfortunately, for newer browsers
-  with tight security restrictions, it might not know your exact location, and is currently using a
-  Google service to approximate your location. If you <a
-  href="https://carpeliam.com/streetpianosboston/">visit this same website with an HTTPS
-  address</a>, it can be a <i>lot</i> more accurate. However, you must agree to the certificate,
-  which your browser will warn you about.
-  <h4>More information</h4>
-  <ul>
-    <li>
-      <a target="_blank" href="http://www.inmotionhosting.com/support/website/ssl/self-signed-ssl-certificate-warning">
-        self-signed certificate warnings
-      </a>
-    </li>
-    <li>
-      <a target="_blank" href="https://developers.google.com/web/updates/2016/04/geolocation-on-secure-contexts-only?hl=en">
-        Google Chrome's choice to stop supporting geolocation for non-secure websites
-      </a>
-    </li>
-  </ul>
 </div>
